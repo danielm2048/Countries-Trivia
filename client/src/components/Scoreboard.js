@@ -1,16 +1,30 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Modal, ModalContent, Close } from "../style/Modal";
 import PlayerScore from "./PlayerScore";
 
 const Scoreboard = ({ data }) => {
 	const [open, setOpen] = useState(false);
 
+	const handleClickOutside = (event) => {
+		if (ref.current && !ref.current.contains(event.target)) {
+			setOpen(false);
+		}
+	};
+
+	const ref = useRef(null);
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [ref]);
+
 	return (
 		<div>
 			<button onClick={() => setOpen(true)}>Score Board</button>
 
 			<Modal open={open}>
-				<ModalContent>
+				<ModalContent ref={ref}>
 					<Close onClick={() => setOpen(false)}>&times;</Close>
 					<h1>Score Board 🏆</h1>
 					<div className="player-score">

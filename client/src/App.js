@@ -2,11 +2,11 @@ import "./App.css";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import { useSelector } from "react-redux";
-import LandingPage from "./components/LandingPage";
-import Login from "./components/Login";
-import TriviaPage from "./components/TriviaPage";
-import EndgamePage from "./components/EndgamePage";
-import NotFound from "./components/NotFound";
+import LandingPage from "./pages/LandingPage";
+import Login from "./pages/Login";
+import TriviaPage from "./pages/TriviaPage";
+import EndgamePage from "./pages/EndgamePage";
+import NotFound from "./pages/NotFound";
 
 const GameRoute = ({ component: Component, ...rest }) => {
 	const player = useSelector((state) => state.player);

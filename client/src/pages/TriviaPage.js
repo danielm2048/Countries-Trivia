@@ -8,9 +8,9 @@ import {
 	resetGame,
 } from "../reducers/playerReducer";
 
-import Loader from "./Loader";
-import QuestionOptions from "./QuestionOptions";
-import Rating from "./Rating";
+import Loader from "../components/Loader";
+import QuestionOptions from "../components/QuestionOptions";
+import Rating from "../components/Rating";
 
 const TriviaPage = ({ history }) => {
 	const [question, setQuestion] = useState();
@@ -62,8 +62,9 @@ const TriviaPage = ({ history }) => {
 			const { data } = await axios.get(
 				`/api/questions/generate?saved=${counter % 3 === 0}`
 			);
+			const res = await axios.get(`/api/ratings/${data.id}`);
 			setLoading(false);
-			setQuestion(data);
+			setQuestion({ ...data, rating: res.data });
 		};
 		generateQuestion();
 	}, [counter]);
@@ -96,7 +97,14 @@ const TriviaPage = ({ history }) => {
 			<div>
 				<p>
 					Question Number: {counter} | Score: {player.score} | Strikes:{" "}
-					{player.strikes} | Time Left: <strong>{timer}</strong>
+					{player.strikes}{" "}
+					{timer >= 0 ? (
+						<>
+							| Time Left: <strong>{timer}</strong>
+						</>
+					) : (
+						""
+					)}
 				</p>
 
 				<div style={{ width: 600 }}>
@@ -119,6 +127,9 @@ const TriviaPage = ({ history }) => {
 				<div>
 					<h3>If you want you can rate this question here 👇</h3>
 					<Rating rating={rating} setRating={setRating} />
+					{question.rating && (
+						<h5>This question was rated {question.rating} / 5 ⭐</h5>
+					)}
 				</div>
 			)}
 

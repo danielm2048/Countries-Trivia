@@ -4,7 +4,7 @@ import globe2 from "../images/globe2.gif";
 
 import axios from "axios";
 
-import Scoreboard from "./Scoreboard";
+import Scoreboard from "../components/Scoreboard";
 
 const LandingPage = ({ history }) => {
 	const [scoreBoard, setScoreBoard] = useState();
