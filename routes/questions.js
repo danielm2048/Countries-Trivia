@@ -2,6 +2,8 @@ const router = require("express").Router();
 const Sequelize = require("sequelize");
 const { Country, Question, QuestionTemplate } = require("../models");
 
+const authorizePlayer = require("../middleware/authMiddleware");
+
 const shuffleOptions = (options) => {
 	let currentIndex = options.length,
 		temporaryValue,
@@ -19,7 +21,7 @@ const shuffleOptions = (options) => {
 	return options;
 };
 
-router.get("/generate", async (req, res) => {
+router.get("/generate", authorizePlayer, async (req, res) => {
 	const { saved } = req.query;
 	if (saved === "true") {
 		const question = await Question.findOne({
