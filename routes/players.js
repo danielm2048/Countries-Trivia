@@ -79,9 +79,12 @@ router.post("/token", cookieParser(), (req, res) => {
 	}
 
 	try {
-		const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+		const { userId, name, email } = jwt.verify(
+			refreshToken,
+			process.env.REFRESH_TOKEN_SECRET
+		);
 
-		const accessToken = createAccessToken(payload);
+		const accessToken = createAccessToken({ id: userId, name, email });
 
 		sendRefreshToken(res, refreshToken);
 		res.json(accessToken);

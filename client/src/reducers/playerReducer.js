@@ -133,8 +133,8 @@ export const playerSlice = createSlice({
 		[loadUser.fulfilled]: (state, action) => {
 			state.isFetching = false;
 			state.isSuccess = true;
-			const { id, name } = jwtDecode(action.payload);
-			state.id = id;
+			const { userId, name } = jwtDecode(action.payload);
+			state.id = userId;
 			state.name = name;
 			state.accessToken = action.payload;
 		},

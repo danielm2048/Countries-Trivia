@@ -15,14 +15,11 @@ const EndgamePage = ({ history }) => {
 
 	useEffect(() => {
 		const updateScore = async () => {
-			const { data } = await axios.post(
-				`/api/players/update-score/${player.id}`,
-				{
-					score: player.score,
-				}
-			);
+			await axios.put(`/api/players/update-score/${player.id}`, {
+				score: player.score,
+			});
 
-			await axios.post(`/api/ratings/${data.id}`, {
+			await axios.post(`/api/ratings/${player.id}`, {
 				ratings: player.ratings,
 			});
 		};
