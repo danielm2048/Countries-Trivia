@@ -11,6 +11,7 @@ import {
 import Loader from "../components/Loader";
 import QuestionOptions from "../components/QuestionOptions";
 import Rating from "../components/Rating";
+import QuestionTimer from "../components/QuestionTimer";
 
 const TriviaPage = ({ history }) => {
 	const [question, setQuestion] = useState();
@@ -98,7 +99,7 @@ const TriviaPage = ({ history }) => {
 				<p>
 					Question Number: {counter} | Score: {player.score} | Strikes:{" "}
 					{player.strikes}{" "}
-					{timer >= 0 ? (
+					{timer > 0 ? (
 						<>
 							| Time Left: <strong>{timer}</strong>
 						</>
@@ -107,9 +108,7 @@ const TriviaPage = ({ history }) => {
 					)}
 				</p>
 
-				<div style={{ width: 600 }}>
-					<h1>{question.fullQuestion}</h1>
-				</div>
+				<QuestionTimer question={question} timer={timer} />
 
 				{timer === 0 && (
 					<h3>Time's up, Maybe try a bit less slowly next time!</h3>

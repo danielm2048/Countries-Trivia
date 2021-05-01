@@ -1,6 +1,6 @@
 import not_found from "../images/not_found.gif";
 
-const Loader = () => {
+const NotFound = () => {
 	return (
 		<div>
 			<img src={not_found} alt="404 page not found" />
@@ -8,4 +8,4 @@ const Loader = () => {
 	);
 };
 
-export default Loader;
+export default NotFound;

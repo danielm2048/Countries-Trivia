@@ -25,18 +25,11 @@ const createRefreshToken = (user) => {
 	return refreshToken;
 };
 
-const sendTokens = (res, accessToken, refreshToken) => {
-	res.cookie("access-token", accessToken, {
-		expires: new Date(Date.now() * 1000 * 60 * 5),
-		httpOnly: true,
-		path: "/api/users/",
-		//secure: true
-	});
-
+const sendRefreshToken = (res, refreshToken) => {
 	res.cookie("refresh-token", refreshToken, {
 		expires: new Date(Date.now() * 1000 * 60 * 60 * 24 * 7),
 		httpOnly: true,
-		path: "/api/users/",
+		// path: "/api/players/token",
 		//secure: true
 	});
 };
@@ -44,5 +37,5 @@ const sendTokens = (res, accessToken, refreshToken) => {
 module.exports = {
 	createAccessToken,
 	createRefreshToken,
-	sendTokens,
+	sendRefreshToken,
 };

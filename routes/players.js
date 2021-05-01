@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const authorizePlayer = require("../middleware/authMiddleware");
 
 const { Player } = require("../models");
 const {
 	createAccessToken,
 	createRefreshToken,
-	sendTokens,
+	sendRefreshToken,
 } = require("../utils/auth");
 
 router.post("/signup", async (req, res) => {
@@ -29,15 +30,16 @@ router.post("/signup", async (req, res) => {
 			name: userName,
 			email,
 			password: hashedPassword,
+			score: 0,
 		},
-		{ fields: ["name", "email", "password"] }
+		{ fields: ["name", "email", "password", "score"] }
 	);
 
 	const accessToken = createAccessToken(newPlayer);
 	const refreshToken = createRefreshToken(newPlayer);
-	sendTokens(res, accessToken, refreshToken);
+	sendRefreshToken(res, refreshToken);
 
-	res.json(newPlayer);
+	res.json({ player: newPlayer, accessToken });
 });
 
 router.post("/login", async (req, res) => {
@@ -59,20 +61,21 @@ router.post("/login", async (req, res) => {
 
 	const accessToken = createAccessToken(player);
 	const refreshToken = createRefreshToken(player);
-	sendTokens(res, accessToken, refreshToken);
+	sendRefreshToken(res, refreshToken);
 
-	res.json(player);
+	res.json({ player, accessToken });
 });
 
 router.post("/logout", (req, res) => {
-	sendTokens(res, "", "");
+	sendRefreshToken(res, "");
+	res.json({ loggedOut: true });
 });
 
-router.post("/token", (req, res) => {
-	const refreshToken = req.headers["authorization"];
+router.post("/token", cookieParser(), (req, res) => {
+	const refreshToken = req.cookies["refresh-token"];
 
 	if (!refreshToken) {
-		return res.status(401).json("Refresh token is required");
+		return res.status(403).json("Refresh token is required");
 	}
 
 	try {
@@ -80,7 +83,8 @@ router.post("/token", (req, res) => {
 
 		const accessToken = createAccessToken(payload);
 
-		sendTokens(res, accessToken, refreshToken);
+		sendRefreshToken(res, refreshToken);
+		res.json(accessToken);
 	} catch (err) {
 		console.log(err);
 		res.status(403).json("Refresh token is invalid");
