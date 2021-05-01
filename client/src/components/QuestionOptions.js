@@ -2,14 +2,7 @@ import { Option } from "../style/TriviaInput";
 
 const QuestionOptions = ({ question, selected, setSelected, submitted }) => {
 	return (
-		<div
-			style={{
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-			className="question-options"
-		>
+		<div className="question-options">
 			{question.options.map((option, i) => (
 				<Option
 					key={i}

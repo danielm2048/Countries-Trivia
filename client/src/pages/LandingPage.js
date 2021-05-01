@@ -22,10 +22,13 @@ const LandingPage = ({ history }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get("/api/players/score-board");
-			console.log(data);
 			setScoreBoard(data);
 		};
 		fetchData();
+
+		return () => {
+			setScoreBoard();
+		};
 	}, []);
 
 	return (

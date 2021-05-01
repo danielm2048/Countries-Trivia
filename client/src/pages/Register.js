@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login, clearState } from "../reducers/playerReducer";
+import { signup, clearState } from "../reducers/playerReducer";
 import { Link } from "react-router-dom";
 
-const Login = ({ history }) => {
+const Register = ({ history }) => {
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const { isSuccess, isError, errorMessage } = useSelector(
 		(state) => state.player
 	);
+
 	const dispatch = useDispatch();
 
-	const loginPlayer = async (e) => {
+	const registerPlayer = (e) => {
 		e.preventDefault();
 
-		dispatch(login({ email, password }));
+		dispatch(signup({ name, email, password }));
 	};
 
 	useEffect(() => {
@@ -36,34 +38,43 @@ const Login = ({ history }) => {
 	return (
 		<div>
 			<h1 className="login-header">Country Quiz</h1>
-			<Link to="/register">Not a user? Click here to register!</Link>
+			<Link to="/login">Already a user? Click here to login!</Link>
 			{isError && <h2>{errorMessage}</h2>}
 			<form
 				style={{ display: "flex", flexDirection: "column" }}
-				onSubmit={loginPlayer}
+				onSubmit={registerPlayer}
 			>
-				<label htmlFor="email">Enter email:</label>
+				<label htmlFor="name">Enter Name:</label>
 				<input
-					id="email"
+					name="name"
+					type="text"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+					placeholder="Enter Your Name..."
+				/>
+
+				<label htmlFor="email">Enter Email:</label>
+				<input
+					name="email"
 					type="text"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					placeholder="Enter your email..."
+					placeholder="Enter Your Email..."
 				/>
 
-				<label htmlFor="password">Enter password: </label>
+				<label htmlFor="password">Enter Password:</label>
 				<input
 					name="password"
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Enter your password..."
+					placeholder="Select Password..."
 				/>
 
-				<button type="submit">Login</button>
+				<button type="submit">Register</button>
 			</form>
 		</div>
 	);
 };
 
-export default Login;
+export default Register;

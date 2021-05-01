@@ -1,39 +1,28 @@
 .App {
 	font-family: "Nanum Gothic", sans-serif;
-	min-height: 100vh;
-	/* overflow-y: hidden; */
-	background: #f0f0f0;
 }
 
-.body {
+body {
+	min-height: 100vh;
 	text-align: center;
-	background: #f0f0f0;
-	/*background: -webkit-linear-gradient(
-		to right,
-		#1234ad,
-		#0575e6
-	); 
-	background: linear-gradient(to right, #021b79, #00274e); */
-	height: 90%;
+	background: #f4f5f9;
+}
+
+.main {
 	display: flex;
 	justify-content: center;
-	/* padding-top: 70px; */
+	/* background-image: url(./images/back.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: calc(100vh - 135px); */
 }
 
 .header {
-	padding: 30px;
-	background: #0575e6; /* fallback for old browsers */
-	background: -webkit-linear-gradient(
-		to right,
-		#9db2f1,
-		#d7e6f5
-	); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #f0f0f0, #8ba8ff);
-	background: linear-gradient(to top, #f0f0f0, #8ba8ff);
-	height: 10%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: center;
+	padding: 15px;
+	background-color: #d6dbf1;
 }
 
 button {
@@ -44,7 +33,7 @@ button {
 	transition: 0.5s;
 	background-size: 200% auto;
 	color: white;
-	border-radius: 10px;
+	border-radius: 25px;
 	background-image: linear-gradient(
 		to right,
 		#4b5861 0%,
@@ -76,7 +65,6 @@ input {
 .login-header {
 	font-size: 40px;
 	font-family: "Original Surfer", cursive;
-	margin: 0;
 }
 button:hover {
 	background-position: right center; /* change the direction of the change here */
@@ -114,16 +102,15 @@ button:hover {
 
 .question-options {
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	flex-wrap: wrap;
-	display: "flex";
-	justify-content: "center";
-	align-items: "center";
-	padding: 50px;
+	padding: 30px;
 }
 
 .rating-group {
 	display: inline-flex;
-	margin-bottom: 50px;
+	margin-bottom: 15px;
 }
 .rating__icon {
 	pointer-events: none;

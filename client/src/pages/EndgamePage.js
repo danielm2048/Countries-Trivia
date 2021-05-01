@@ -1,27 +1,33 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetGame } from "../reducers/playerReducer";
 import axios from "axios";
 
 const EndgamePage = ({ history }) => {
 	const player = useSelector((state) => state.player);
+	const dispatch = useDispatch();
 
 	const startNewGame = () => {
+		dispatch(resetGame());
+
 		history.push("/game");
 	};
 
 	useEffect(() => {
-		const createNewUser = async () => {
-			const { data } = await axios.post("/api/players/signup", {
-				userName: player.name,
-				score: player.score,
-			});
+		const updateScore = async () => {
+			const { data } = await axios.post(
+				`/api/players/update-score/${player.id}`,
+				{
+					score: player.score,
+				}
+			);
 
 			await axios.post(`/api/ratings/${data.id}`, {
 				ratings: player.ratings,
 			});
 		};
-		createNewUser();
-	}, [player.name, player.score, player.ratings]);
+		updateScore();
+	}, [player.id, player.score, player.ratings]);
 
 	return (
 		<div>

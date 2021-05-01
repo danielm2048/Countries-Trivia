@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const { Rating, Player } = require("../models");
 
-router.post("/:playerId", async (req, res) => {
+const authorizePlayer = require("../middleware/authMiddleware");
+
+router.post("/:playerId", authorizePlayer, async (req, res) => {
 	const { playerId } = req.params;
 	const { ratings } = req.body;
 
