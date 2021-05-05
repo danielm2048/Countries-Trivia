@@ -29,8 +29,7 @@ const sendRefreshToken = (res, refreshToken) => {
 	res.cookie("refresh-token", refreshToken, {
 		expires: new Date(Date.now() * 1000 * 60 * 60 * 24 * 7),
 		httpOnly: true,
-		// path: "/api/players/token",
-		//secure: true
+		secure: true,
 	});
 };
 
