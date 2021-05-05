@@ -25,12 +25,12 @@ const Header = ({ player }) => {
 			<span className="login">
 				{player.name ? (
 					<HeaderActions>
-						Hello {player.name}
+						<strong>Hello {player.name}</strong>
 						<button onClick={logout}>Logout</button>
 					</HeaderActions>
 				) : (
 					<HeaderActions>
-						Please login
+						<strong>Please login</strong>
 						<Link to="/login">
 							<UserCircle title="login" size="50" color="#115d80" />
 						</Link>

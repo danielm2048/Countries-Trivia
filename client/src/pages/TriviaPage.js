@@ -66,6 +66,7 @@ const TriviaPage = ({ history }) => {
 			const res = await axios.get(`/api/ratings/${data.id}`);
 			setLoading(false);
 			setQuestion({ ...data, rating: res.data });
+			console.log("This is the answer: ", data.answer);
 		};
 		generateQuestion();
 	}, [counter]);
@@ -90,8 +91,6 @@ const TriviaPage = ({ history }) => {
 	if (loading || !question) {
 		return <Loader />;
 	}
-
-	console.log("This is the answer: ", question.answer);
 
 	return (
 		<div>
