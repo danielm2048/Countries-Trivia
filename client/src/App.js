@@ -63,7 +63,6 @@ const App = () => {
 		(response) => response,
 		async (error) => {
 			const originalRequest = error.config;
-			console.log(originalRequest.url);
 			if (
 				error.response.status === 403 &&
 				originalRequest.url.includes("api/players/token")

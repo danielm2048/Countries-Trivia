@@ -20,10 +20,16 @@ module.exports = {
 		dialect: "mysql",
 	},
 	production: {
-		username: "root",
-		password: null,
-		database: "database_production",
-		host: "127.0.0.1",
+		username: process.env.DB_USER,
+		password: process.env.DB_PASSWORD,
+		database: process.env.DB_SCHEMA,
 		dialect: "mysql",
+		dialectOptions: {
+			socketPath: `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`,
+		},
+		define: {
+			underscored: true,
+			underscoredAll: true,
+		},
 	},
 };
