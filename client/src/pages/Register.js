@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signup, clearState } from "../reducers/playerReducer";
-import { Link } from "react-router-dom";
+import { StyledLink } from "../style/StyledLink";
+import { StyledButton } from "../style/StyledButton";
+import HomeLink from "../components/HomeLink";
 
 const Register = ({ history }) => {
 	const [name, setName] = useState("");
@@ -36,13 +38,23 @@ const Register = ({ history }) => {
 	}, [isSuccess, isError, errorMessage, history]);
 
 	return (
-		<div>
-			<h1 className="login-header">Country Quiz</h1>
-			<Link to="/login">Already a user? Click here to login!</Link>
-			{isError && <h2>{errorMessage}</h2>}
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+			}}
+		>
+			<HomeLink />
+			<StyledLink to="/login">Have an account? Click here to login!</StyledLink>
+			{isError && <h2 style={{ color: "red" }}>{errorMessage}!</h2>}
 			<form
-				style={{ display: "flex", flexDirection: "column" }}
 				onSubmit={registerPlayer}
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+				}}
 			>
 				<label htmlFor="name">Enter Name:</label>
 				<input
@@ -71,7 +83,7 @@ const Register = ({ history }) => {
 					placeholder="Select Password..."
 				/>
 
-				<button type="submit">Register</button>
+				<StyledButton type="submit">Register</StyledButton>
 			</form>
 		</div>
 	);

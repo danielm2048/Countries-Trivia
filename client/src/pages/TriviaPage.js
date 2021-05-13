@@ -7,6 +7,9 @@ import {
 	rateQuestion,
 	resetGame,
 } from "../reducers/playerReducer";
+import { Link } from "react-router-dom";
+import { Home } from "@styled-icons/boxicons-regular";
+import { StyledButton } from "../style/StyledButton";
 
 import Loader from "../components/Loader";
 import QuestionOptions from "../components/QuestionOptions";
@@ -95,6 +98,9 @@ const TriviaPage = ({ history }) => {
 	return (
 		<div>
 			<div>
+				<Link to="/">
+					<Home title="home" size="40" color="#115d80" />
+				</Link>
 				<p>
 					Question Number: {counter} | Score: {player.score} | Strikes:{" "}
 					{player.strikes}{" "}
@@ -131,13 +137,13 @@ const TriviaPage = ({ history }) => {
 				</div>
 			)}
 
-			<button onClick={submitAnswer}>
+			<StyledButton onClick={submitAnswer}>
 				{submitted
 					? player.strikes === 3
 						? "Finish Game"
 						: "Next Question!"
 					: "Submit Answer"}
-			</button>
+			</StyledButton>
 		</div>
 	);
 };

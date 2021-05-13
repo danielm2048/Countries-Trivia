@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Modal, ModalContent, Close } from "../style/Modal";
 import PlayerScore from "./PlayerScore";
+import { StyledBordersButton } from "../style/StyledButton";
+import { Trophy } from "@styled-icons/boxicons-solid";
 
 const Scoreboard = ({ data }) => {
 	const [open, setOpen] = useState(false);
@@ -21,7 +23,9 @@ const Scoreboard = ({ data }) => {
 
 	return (
 		<div>
-			<button onClick={() => setOpen(true)}>Score Board</button>
+			<StyledBordersButton onClick={() => setOpen(true)}>
+				Score Board <Trophy size="25" color="gold" />
+			</StyledBordersButton>
 
 			<Modal open={open}>
 				<ModalContent ref={ref}>

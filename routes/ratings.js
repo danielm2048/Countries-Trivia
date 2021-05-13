@@ -3,15 +3,15 @@ const { Rating, Player } = require("../models");
 
 const authorizePlayer = require("../middleware/authMiddleware");
 
-router.post("/:playerId", authorizePlayer, async (req, res) => {
-	const { playerId } = req.params;
+router.post("/", authorizePlayer, async (req, res) => {
 	const { ratings } = req.body;
+	const { userId } = req.user;
 
 	ratings.map(async (item) => {
 		await Rating.create(
 			{
 				questionId: item.questionId,
-				playerId,
+				playerId: userId,
 				rating: item.rating,
 			},
 			{ fields: ["questionId", "playerId", "rating"] }

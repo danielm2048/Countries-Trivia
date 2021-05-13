@@ -1,93 +1,53 @@
 .App {
-	position: relative;
+	/* position: relative; */
 	font-family: "Nanum Gothic", sans-serif;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 body {
-	min-height: 100vh;
 	text-align: center;
-	background: #3399ff;
+	background: linear-gradient(333deg, #3279d5, #1bd195);
+	background-size: 400% 400%;
+
+	-webkit-animation: AnimationName 25s ease infinite;
+	-moz-animation: AnimationName 25s ease infinite;
+	animation: AnimationName 25s ease infinite;
 }
 
-.ripple-background {
-	position: fixed;
-	bottom: 0;
-}
-
-.circle {
-	position: absolute;
-	border-radius: 50%;
-	background: white;
-	animation: ripple 15s infinite;
-	box-shadow: 0px 0px 1px 0px #508fb9;
-	z-index: -1;
-}
-
-.small {
-	width: 150px;
-	height: 150px;
-	left: -75px;
-	bottom: -75px;
-}
-
-.medium {
-	width: 300px;
-	height: 300px;
-	left: -150px;
-	bottom: -150px;
-}
-
-.large {
-	width: 450px;
-	height: 450px;
-	left: -225px;
-	bottom: -225px;
-}
-
-.xlarge {
-	width: 600px;
-	height: 600px;
-	left: -300px;
-	bottom: -300px;
-}
-
-.xxlarge {
-	width: 750px;
-	height: 750px;
-	left: -375px;
-	bottom: -375px;
-}
-
-.shade1 {
-	opacity: 0.2;
-}
-.shade2 {
-	opacity: 0.5;
-}
-
-.shade3 {
-	opacity: 0.7;
-}
-
-.shade4 {
-	opacity: 0.8;
-}
-
-.shade5 {
-	opacity: 0.9;
-}
-
-@keyframes ripple {
+@-webkit-keyframes AnimationName {
 	0% {
-		transform: scale(0.8);
+		background-position: 19% 0%;
 	}
-
 	50% {
-		transform: scale(1.2);
+		background-position: 82% 100%;
 	}
-
 	100% {
-		transform: scale(0.8);
+		background-position: 19% 0%;
+	}
+}
+@-moz-keyframes AnimationName {
+	0% {
+		background-position: 19% 0%;
+	}
+	50% {
+		background-position: 82% 100%;
+	}
+	100% {
+		background-position: 19% 0%;
+	}
+}
+@keyframes AnimationName {
+	0% {
+		background-position: 19% 0%;
+	}
+	50% {
+		background-position: 82% 100%;
+	}
+	100% {
+		background-position: 19% 0%;
 	}
 }
 
@@ -97,16 +57,16 @@ body {
 }
 
 .header {
-	position: sticky;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	padding: 5px;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-	background-color: #e7f3ff;
+	position: absolute;
+	top: 15px;
+	right: 15px;
 }
 
-button {
+form {
+	margin: 20px 0;
+}
+
+/* button {
 	margin: 10px;
 	padding: 15px 45px;
 	text-align: center;
@@ -127,31 +87,33 @@ button {
 	letter-spacing: 1px;
 	border: none;
 	cursor: pointer;
-}
+} */
 
 input {
-	/* background-color: #487a9981; */
 	outline: none;
 	padding: 12px 20px;
-	margin: 8px 0;
 	display: inline-block;
 	border: 1px solid rgb(100, 96, 96);
 	border-radius: 4px;
-	box-sizing: border-box;
 	margin: 15px;
 	font-size: 16px;
 	font-weight: bold;
-	/* color: rgb(192, 188, 188); */
+	width: 300px;
+	text-align: center;
+	transition: width 0.18s ease-in-out;
+}
+input:focus {
+	width: 350px;
 }
 .login-header {
 	font-size: 50px;
 	font-family: "Original Surfer", cursive;
 }
-button:hover {
-	background-position: right center; /* change the direction of the change here */
+/* button:hover {
+	background-position: right center;
 	color: #fff;
 	text-decoration: none;
-}
+} */
 
 .player-score {
 	display: flex;

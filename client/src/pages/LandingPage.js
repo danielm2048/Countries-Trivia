@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import globe2 from "../images/globe2.gif";
 
 import axios from "axios";
 
 import Scoreboard from "../components/Scoreboard";
+import { StyledButton } from "../style/StyledButton";
+import HomeLink from "../components/HomeLink";
 
 const LandingPage = ({ history }) => {
 	const [scoreBoard, setScoreBoard] = useState();
@@ -32,12 +33,16 @@ const LandingPage = ({ history }) => {
 	}, []);
 
 	return (
-		<div>
-			<img style={{ height: 300 }} src={globe2} alt="logo" />
-			<h1 className="login-header">Country Quiz</h1>
-			<br />
-			<div className="ex2 draw"></div>
-			<button onClick={startGame}>Start Game</button>
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
+		>
+			<HomeLink />
+			<StyledButton onClick={startGame}>Start Game</StyledButton>
 			<Scoreboard data={scoreBoard} />
 		</div>
 	);
