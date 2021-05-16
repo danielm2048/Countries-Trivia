@@ -12,10 +12,10 @@ const ratingRouter = require("./routes/ratings");
 
 app.use(express.json());
 app.use(
-	cors({
-		origin: "http://localhost:3000",
-		credentials: true,
-	})
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
 );
 app.use(helmet({ contentSecurityPolicy: false }));
 
@@ -28,9 +28,9 @@ app.use("/api/ratings", ratingRouter);
 app.use(express.static("client/build"));
 
 app.get("*", (_, res) => {
-	res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
 });
 
 app.listen(PORT, () => {
-	console.log("Server is running 🚀");
+  console.log("Server is running 🚀");
 });
