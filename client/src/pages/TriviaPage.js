@@ -2,10 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-	addToPlayerScore,
-	incrementStrikes,
-	rateQuestion,
-	resetGame,
+  addToPlayerScore,
+  incrementStrikes,
+  rateQuestion,
+  resetGame,
 } from "../reducers/playerReducer";
 import { Link } from "react-router-dom";
 import { Home } from "@styled-icons/boxicons-regular";
@@ -17,135 +17,147 @@ import Rating from "../components/Rating";
 import QuestionTimer from "../components/QuestionTimer";
 
 const TriviaPage = ({ history }) => {
-	const [question, setQuestion] = useState();
-	const [counter, setCounter] = useState(1);
-	const [loading, setLoading] = useState(false);
-	const [selected, setSelected] = useState();
-	const [submitted, setSubmitted] = useState(false);
-	const [timer, setTimer] = useState(20);
-	const [rating, setRating] = useState(0);
+  const [question, setQuestion] = useState();
+  const [counter, setCounter] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState();
+  const [submitted, setSubmitted] = useState(false);
+  const [timer, setTimer] = useState(20);
+  const [rating, setRating] = useState(0);
 
-	const player = useSelector((state) => state.player);
-	const dispatch = useDispatch();
+  const player = useSelector((state) => state.player);
+  const dispatch = useDispatch();
 
-	const submitAnswer = () => {
-		if (submitted) {
-			if (rating) {
-				dispatch(rateQuestion({ questionId: question.id, rating }));
-			}
+  const submitAnswer = () => {
+    if (submitted) {
+      if (rating) {
+        dispatch(rateQuestion({ questionId: question.id, rating }));
+      }
 
-			if (player.strikes === 3) {
-				history.push("/end-game");
-			}
+      if (player.strikes === 3) {
+        history.push("/end-game");
+      }
 
-			setSubmitted(false);
-			setSelected();
-			setTimer(20);
-			setRating(0);
-			setCounter((prevState) => prevState + 1);
-		} else {
-			if (selected) {
-				setSubmitted(true);
-				setTimer(-1);
-				if (question.answer !== selected) {
-					dispatch(incrementStrikes());
-				} else {
-					dispatch(addToPlayerScore(timer * 10));
-				}
-			}
-		}
-	};
+      setSubmitted(false);
+      setSelected();
+      setTimer(20);
+      setRating(0);
+      setCounter((prevState) => prevState + 1);
+    } else {
+      if (selected) {
+        setSubmitted(true);
+        setTimer(-1);
+        if (question.answer !== selected) {
+          dispatch(incrementStrikes());
+        } else {
+          dispatch(addToPlayerScore(timer * 10));
+        }
+      }
+    }
+  };
 
-	useEffect(() => {
-		dispatch(resetGame());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(resetGame());
+  }, [dispatch]);
 
-	useEffect(() => {
-		const generateQuestion = async () => {
-			setLoading(true);
-			const { data } = await axios.get(
-				`/api/questions/generate?saved=${counter % 3 === 0}`
-			);
-			const res = await axios.get(`/api/ratings/${data.id}`);
-			setLoading(false);
-			setQuestion({ ...data, rating: res.data });
-			console.log("This is the answer: ", data.answer);
-		};
-		generateQuestion();
-	}, [counter]);
+  useEffect(() => {
+    const generateQuestion = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axios.get(
+          `/api/questions/generate?saved=${counter % 3 === 0}`
+        );
+        const res = await axios.get(`/api/ratings/${data.id}`);
+        setQuestion({ ...data, rating: res.data });
+        console.log("This is the answer: ", data.answer);
+      } catch (err) {
+        console.error(err);
+        alert(
+          "Sorry, we couldn't generate a question right now.. Please try again later"
+        );
+        setQuestion();
+      }
+      setLoading(false);
+    };
+    generateQuestion();
 
-	useEffect(() => {
-		let interval = null;
+    return () => {
+      setQuestion();
+    };
+  }, [counter]);
 
-		interval = setInterval(() => setTimer((prevState) => prevState - 1), 1000);
+  useEffect(() => {
+    let interval = null;
 
-		if (timer <= 0) {
-			clearInterval(interval);
-			setSubmitted(true);
+    interval = setInterval(() => setTimer((prevState) => prevState - 1), 1000);
 
-			if (timer === 0) {
-				dispatch(incrementStrikes());
-			}
-		}
+    if (timer <= 0) {
+      clearInterval(interval);
+      setSubmitted(true);
 
-		return () => clearInterval(interval);
-	}, [timer, dispatch, history]);
+      if (timer === 0) {
+        dispatch(incrementStrikes());
+      }
+    }
 
-	if (loading || !question) {
-		return <Loader />;
-	}
+    return () => clearInterval(interval);
+  }, [timer, dispatch, history]);
 
-	return (
-		<div>
-			<div>
-				<Link to="/">
-					<Home title="home" size="40" color="#115d80" />
-				</Link>
-				<p>
-					Question Number: {counter} | Score: {player.score} | Strikes:{" "}
-					{player.strikes}{" "}
-					{timer > 0 ? (
-						<>
-							| Time Left: <strong>{timer}</strong>
-						</>
-					) : (
-						""
-					)}
-				</p>
+  if (loading || !question) {
+    return <Loader />;
+  }
 
-				<QuestionTimer question={question} timer={timer} />
+  return (
+    <div>
+      <div>
+        <Link to="/">
+          <Home title="home" size="40" color="#115d80" />
+        </Link>
+        <p>
+          Question Number: {counter} | Score: {player.score} | Strikes:{" "}
+          {player.strikes}{" "}
+          {timer > 0 ? (
+            <>
+              | Time Left: <strong>{timer}</strong>
+            </>
+          ) : (
+            ""
+          )}
+        </p>
 
-				{timer === 0 && (
-					<h3>Time's up, Maybe try a bit less slowly next time!</h3>
-				)}
-			</div>
+        <QuestionTimer question={question} timer={timer} />
 
-			<QuestionOptions
-				question={question}
-				selected={selected}
-				setSelected={setSelected}
-				submitted={submitted}
-			/>
+        {timer === 0 && (
+          <h3>Time's up, Maybe try a bit less slowly next time!</h3>
+        )}
+      </div>
 
-			{submitted && (
-				<div>
-					<h3>If you want you can rate this question here 👇</h3>
-					<Rating rating={rating} setRating={setRating} />
-					{question.rating && (
-						<h5>This question was rated {question.rating} / 5 ⭐</h5>
-					)}
-				</div>
-			)}
+      <QuestionOptions
+        question={question}
+        selected={selected}
+        setSelected={setSelected}
+        submitted={submitted}
+      />
 
-			<StyledButton onClick={submitAnswer}>
-				{submitted
-					? player.strikes === 3
-						? "Finish Game"
-						: "Next Question!"
-					: "Submit Answer"}
-			</StyledButton>
-		</div>
-	);
+      {submitted && (
+        <div>
+          <h3>If you want you can rate this question here 👇</h3>
+          <Rating rating={rating} setRating={setRating} />
+          {question.rating && (
+            <h5>This question was rated {question.rating} / 5 ⭐</h5>
+          )}
+        </div>
+      )}
+
+      <StyledButton onClick={submitAnswer}>
+        {submitted
+          ? player.strikes === 3
+            ? "Finish Game"
+            : "Next Question!"
+          : "Submit Answer"}
+      </StyledButton>
+    </div>
+  );
 };
 
 export default TriviaPage;
