@@ -1,4 +1,17 @@
-# Countries-Trivia
+# <img src="./client/src/images/globe2.gif" alt="globe image" width="50"/> Countries-Trivia <img src="./client/src/images/globe2.gif" alt="globe image" width="50"/>
+
+## Technologies used
+
+- MySQL
+- Sequelize
+- Express
+- Node.js
+- Authentication using JWT
+- React
+- Redux-Toolkit
+- Styled Components
+- CSS
+- Google Cloud
 
 ## How to run on your local machine:
 
@@ -50,3 +63,7 @@ npm start
 ```
 
 All you have left is to enjoy🎉🎊
+
+## Deployed version on Google Cloud
+
+[App Engine page](https://direct-obelisk-314012.ey.r.appspot.com/)

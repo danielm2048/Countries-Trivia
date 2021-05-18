@@ -20,9 +20,7 @@
     "helmet": "^4.5.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.6.2",
-    "styled-components": "^5.2.3",
-    "styled-icons": "^10.33.0"
+    "sequelize": "^6.6.2"
   },
   "devDependencies": {
     "@types/sequelize": "^4.28.9",
