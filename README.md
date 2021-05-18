@@ -62,7 +62,7 @@ cd client
 npm start
 ```
 
-All you have left is to enjoy🎉🎊
+All you have left to do is to enjoy🎉🎊
 
 ## Deployed version on Google Cloud
 
