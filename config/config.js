@@ -27,7 +27,7 @@ module.exports = {
     maxConcurrentQueries: 100,
     dialect: "mysql",
     dialectOptions: {
-      ssl: "AMAZON RDS",
+      ssl: "Amazon RDS",
     },
     define: {
       underscored: true,
