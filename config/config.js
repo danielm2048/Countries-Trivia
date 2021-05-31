@@ -23,9 +23,11 @@ module.exports = {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_SCHEMA,
+    host: process.env.DB_HOST,
+    maxConcurrentQueries: 100,
     dialect: "mysql",
     dialectOptions: {
-      socketPath: `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`,
+      ssl: "AMAZON RDS",
     },
     define: {
       underscored: true,
