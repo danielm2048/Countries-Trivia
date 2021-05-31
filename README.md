@@ -11,7 +11,7 @@
 - Redux-Toolkit
 - Styled Components
 - CSS
-- Google Cloud
+- AWS RDS
 
 ## How to run on your local machine:
 
