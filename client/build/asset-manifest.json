@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8301324e.chunk.css",
+    "main.js": "/static/js/main.9b750af0.chunk.js",
+    "main.js.map": "/static/js/main.9b750af0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.89ab7d90.js",
+    "runtime-main.js.map": "/static/js/runtime-main.89ab7d90.js.map",
+    "static/js/2.0d18b6c9.chunk.js": "/static/js/2.0d18b6c9.chunk.js",
+    "static/js/2.0d18b6c9.chunk.js.map": "/static/js/2.0d18b6c9.chunk.js.map",
+    "static/js/3.c08a6a81.chunk.js": "/static/js/3.c08a6a81.chunk.js",
+    "static/js/3.c08a6a81.chunk.js.map": "/static/js/3.c08a6a81.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.8301324e.chunk.css.map": "/static/css/main.8301324e.chunk.css.map",
+    "static/js/2.0d18b6c9.chunk.js.LICENSE.txt": "/static/js/2.0d18b6c9.chunk.js.LICENSE.txt",
+    "static/media/country_quiz_logo.b1610612.png": "/static/media/country_quiz_logo.b1610612.png",
+    "static/media/loading.3e624d43.gif": "/static/media/loading.3e624d43.gif",
+    "static/media/not_found.3b2b4d45.gif": "/static/media/not_found.3b2b4d45.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.89ab7d90.js",
+    "static/js/2.0d18b6c9.chunk.js",
+    "static/css/main.8301324e.chunk.css",
+    "static/js/main.9b750af0.chunk.js"
+  ]
+}

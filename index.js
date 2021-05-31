@@ -13,7 +13,7 @@ const ratingRouter = require("./routes/ratings");
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://country-trivia-best.herokuapp.com",
     credentials: true,
   })
 );
